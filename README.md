@@ -8,6 +8,7 @@ KrishiVaidya is a Computer Vision project that uses Deep Learning to identify pl
 The goal is to help farmers, students, and researchers quickly identify crop diseases by simply uploading a photograph of a plant leaf. The system predicts the disease, displays the confidence score, highlights the affected region using Explainable AI (Grad-CAM), and provides basic disease information.
 
 This project is being developed as an independent project under the Foundations of Applied Machine Learning internship and is designed to become the Computer Vision module of the Dhara Veda smart agriculture platform.
+<center><img width="254" height="254" alt="ChatGPT Image Jul 1, 2026, 10_12_13 AM" src="https://github.com/user-attachments/assets/51b13259-d360-417c-9a12-d08473fe860b" /></center>
 
 ## Objectives
 <ul>
@@ -19,5 +20,6 @@ This project is being developed as an independent project under the Foundations 
 <li>Create a reusable AI module for future integration into Dhara Veda.
 </ul>
 
+## WorkFlow
+<img width="1829" height="478" alt="image" src="https://github.com/user-attachments/assets/4ebea187-a253-4db4-a84f-da3d339cf7c1" />
 
-<img width="1170" height="780" alt="image" src="https://github.com/user-attachments/assets/68c95288-d269-4511-9b24-6d47072f892a" />
