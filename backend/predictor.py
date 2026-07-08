@@ -8,18 +8,17 @@ import torch.nn as nn
 from torchvision import models
 
 from backend.config import MODEL_PATH, DEVICE
+from backend.image_utils import ImageProcessor
 
 
 class PlantDiseasePredictor:
-    """
-    Loads the trained model and performs prediction.
-    """
 
     def __init__(self):
 
-        # --------------------------
-        # Load checkpoint
-        # --------------------------
+        # -------------------------
+        # Load Checkpoint
+        # -------------------------
+
         checkpoint = torch.load(
             MODEL_PATH,
             map_location=DEVICE
@@ -29,11 +28,16 @@ class PlantDiseasePredictor:
         self.num_classes = checkpoint["num_classes"]
         self.image_size = checkpoint["image_size"]
 
-        print("✅ Checkpoint Loaded")
+        # -------------------------
+        # Image Processor
+        # -------------------------
 
-        # --------------------------
-        # Build EfficientNet-B0
-        # --------------------------
+        self.processor = ImageProcessor(self.image_size)
+
+        # -------------------------
+        # Build Model
+        # -------------------------
+
         self.model = models.efficientnet_b0(weights=None)
 
         in_features = self.model.classifier[1].in_features
@@ -43,9 +47,6 @@ class PlantDiseasePredictor:
             self.num_classes
         )
 
-        # --------------------------
-        # Load trained weights
-        # --------------------------
         self.model.load_state_dict(
             checkpoint["model_state_dict"]
         )
@@ -54,22 +55,38 @@ class PlantDiseasePredictor:
 
         self.model.eval()
 
-        print("✅ Model Loaded Successfully")
+        print("✅ Model Ready")
+
+    # ==================================================
+
+    def predict(self, image_path):
+
+        image = self.processor.preprocess(image_path)
+
+        image = image.to(DEVICE)
+
+        with torch.no_grad():
+
+            outputs = self.model(image)
+
+            probabilities = torch.softmax(outputs, dim=1)
+
+            confidence, predicted = torch.max(probabilities, dim=1)
+
+        prediction = self.class_names[predicted.item()]
+
+        return {
+            "prediction": prediction,
+            "confidence": round(confidence.item() * 100, 2)
+        }
 
 
 if __name__ == "__main__":
 
     predictor = PlantDiseasePredictor()
 
-    print()
+    image_path = "data/sample_images/test.jpg"
 
-    print("Classes :", predictor.num_classes)
+    result = predictor.predict(image_path)
 
-    print("Image Size :", predictor.image_size)
-
-    print()
-
-    print("First 5 Classes")
-
-    for cls in predictor.class_names[:5]:
-        print("-", cls)
+    print(result)
