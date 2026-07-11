@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiVaidya - Intelligent Crop Disease Detection</title>
+    <meta name="description" content="AI-powered Computer Vision system for intelligent crop disease detection using Deep Learning.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="glass-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <h1>KrishiVaidya</h1>
+            </div>
+            <p class="subtitle">AI-Powered Crop Disease Detection</p>
+        </header>
+        
+        <main>
+            <div class="upload-section" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h2>Upload Leaf Image</h2>
+                    <p>Drag and drop your image here or click to browse</p>
+                </div>
+            </div>
+
+            <div class="preview-section hidden" id="previewSection">
+                <div class="image-wrapper">
+                    <img id="imagePreview" src="" alt="Selected Leaf">
+                    <button class="remove-btn" id="removeBtn" aria-label="Remove image">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <button class="analyze-btn" id="analyzeBtn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Image
+                </button>
+            </div>
+
+            <div class="loading-section hidden" id="loadingSection">
+                <div class="scanner-container">
+                    <div class="scanner"></div>
+                </div>
+                <p>Analyzing plant health...</p>
+            </div>
+
+            <div class="result-section hidden" id="resultSection">
+                <div class="result-card">
+                    <div class="result-header">
+                        <i class="fa-solid fa-microscope"></i>
+                        <h3>Analysis Complete</h3>
+                    </div>
+                    <div class="prediction-details">
+                        <div class="detail-item">
+                            <span class="label">Condition Detected:</span>
+                            <span class="value prediction-text" id="predictionValue">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Confidence Score:</span>
+                            <div class="confidence-bar-container">
+                                <div class="confidence-bar" id="confidenceBar"></div>
+                            </div>
+                            <span class="value score" id="confidenceValue">0%</span>
+                        </div>
+                    </div>
+                    <button class="reset-btn" id="resetBtn">Test Another Image</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Powered by Deep Learning &bull; Dhara Veda Smart Agriculture</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
